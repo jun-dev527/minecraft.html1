@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | Minecraft Сервер</title>
+    <link rel="stylesheet" href="../src/css.css">
+    <link rel="stylesheet" href="../src/auth.css">
+    <link rel="stylesheet" href="../src/profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .avatar-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(59, 65, 128, 0.7);
+            border: 4px solid #8B5CF6;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+            margin: 0 auto 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .avatar-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-sidebar {
+            background: rgba(30, 32, 60, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            width: 280px;
+        }
+        
+        .profile-nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            color: #e4e6eb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-nav-item:hover {
+            background: rgba(139, 92, 246, 0.15);
+            color: #8B5CF6;
+        }
+        
+        .profile-nav-item.active {
+            background: linear-gradient(90deg, #8B5CF6, #6366F1);
+            color: white;
+            box-shadow: 0 5px 10px rgba(139, 92, 246, 0.3);
+        }
+        
+        .profile-nav-item i {
+            margin-right: 12px;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .profile-welcome {
+            background: linear-gradient(135deg, rgba(58, 62, 110, 0.7), rgba(43, 45, 83, 0.7));
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-welcome h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .profile-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .profile-card {
+            background: rgba(30, 32, 60, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(139, 92, 246, 0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #8B5CF6;
+            font-size: 22px;
+        }
+        
+        .card-info {
+            flex: 1;
+        }
+        
+        .card-info h3 {
+            font-size: 16px;
+            color: #e4e6eb;
+            margin-bottom: 5px;
+        }
+        
+        .card-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2px;
+        }
+        
+        .card-value.online {
+            color: #10B981;
+        }
+        
+        .card-detail {
+            font-size: 12px;
+            color: #9CA3AF;
+        }
+        
+        .add-balance {
+            background: linear-gradient(90deg, #8B5CF6, #6366F1);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 4px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 5px;
+        }
+        
+        .add-balance:hover {
+            background: linear-gradient(90deg, #7c4edc, #5457db);
+            transform: translateY(-2px);
+        }
+        
+        .game-launcher {
+            background: linear-gradient(135deg, rgba(88, 28, 135, 0.8), rgba(67, 20, 104, 0.8));
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-launcher::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('../src/img/minecraft-texture.png');
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .game-launcher-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .launcher-info {
+            flex: 1;
+        }
+        
+        .launcher-info h2 {
+            font-size: 24px;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .launcher-info p {
+            color: #d1d5db;
+            margin-bottom: 20px;
+            max-width: 600px;
+        }
+        
+        .launcher-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .download-launcher-btn {
+            background: linear-gradient(90deg, #10B981, #059669);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .download-launcher-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+        
+        .download-launcher-btn i {
+            margin-right: 10px;
+        }
+        
+        .play-now-btn {
+            background: linear-gradient(90deg, #8B5CF6, #6366F1);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+        }
+        
+        .play-now-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+        
+        .play-now-btn i {
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 1024px) {
+            .profile-container {
+                flex-direction: column;
+            }
+            
+            .profile-sidebar {
+                width: 100%;
+                margin-bottom: 30px;
+            }
+            
+            .profile-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .launcher-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .launcher-info {
+                margin-bottom: 20px;
+            }
+            
+            .game-launcher-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .profile-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .logo {
+            margin: 0 auto;
+            display: block;
+            align-items: center;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 700;
+            color: #8B5CF6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #8B5CF6, #6366F1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .nav {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="main.html" class="logo">
+                    вернуться на главную
+                </a>
+                <nav class="nav">
+                    <ul class="menu">
+                        <li><a href="main.html">ГЛАВНАЯ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-container" style="display: flex; gap: 30px;">
+                <div class="profile-sidebar">
+                    <div class="profile-user-info">
+                        <div class="avatar-circle">
+                            <img src="../src/img/avatar-default.png" alt="Аватар пользователя">
+                        </div>
+                        <h2 class="profile-username" style="color: white; font-size: 22px; text-align: center; margin-bottom: 10px;">Player123</h2>
+                    </div>
+                    <nav class="profile-nav" style="margin-top: 25px;">
+                        <a href="#overview" class="profile-nav-item active" data-tab="overview">
+                            <i class="fas fa-home"></i> Обзор
+                        </a>
+                        <a href="#donations" class="profile-nav-item" data-tab="donations">
+                            <i class="fas fa-coins"></i> Донат
+                        </a>
+                        <a href="#settings" class="profile-nav-item" data-tab="settings">
+                            <i class="fas fa-cog"></i> Настройки аккаунта
+                        </a>
+                    </nav>
+                </div>
+                
+                <div class="profile-content" style="flex: 1;">
+                    <!-- Обзор -->
+                    <div class="profile-tab-content active" id="overview-tab">
+                        <div class="profile-welcome">
+                            <h1>Добро пожаловать, Player123!</h1>
+                            <p>Здесь вы можете управлять своим аккаунтом, проверять статистику и многое другое.</p>
+                        </div>
+                        
+                        <div class="profile-cards">
+                            <div class="profile-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-server"></i>
+                                </div>
+                                <div class="card-info">
+                                    <h3>Статус сервера</h3>
+                                    <p class="card-value online">Онлайн</p>
+                                    <p class="card-detail">Игроков: 42/100</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="game-launcher">
+                            <div class="game-launcher-content">
+                                <div class="launcher-info">
+                                    <h2>Начать игру</h2>
+                                    <p>Скачайте наш лаунчер для быстрого доступа к серверу или установите сборку модов напрямую.</p>
+                                </div>
+                                <div class="launcher-buttons">
+                                    <button class="download-launcher-btn">
+                                        <i class="fas fa-download"></i> Скачать лаунчер
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Пополнение баланса -->
+                    <div class="profile-tab-content" id="donations-tab">
+                        <h1><i class="fas fa-coins"></i> Донат</h1>
+                        <p class="tab-description">Пополните свой игровой баланс и приобретайте премиум возможности.</p>
+                        
+                        <div class="donation-packages">
+                            <div class="donation-package">
+                                <div class="package-header">
+                                    <h3>Стартовый</h3>
+                                    <div class="package-price">100 ₽</div>
+                                </div>
+                                <div class="package-content">
+                                    <ul class="package-benefits">
+                                        <li><i class="fas fa-check"></i> 200 монет</li>
+                                        <li><i class="fas fa-check"></i> 1 базовый скин</li>
+                                    </ul>
+                                    <button class="package-buy-btn">Выбрать</button>
+                                </div>
+                            </div>
+                            
+                            <div class="donation-package popular">
+                                <div class="popular-badge">Популярный</div>
+                                <div class="package-header">
+                                    <h3>Премиум</h3>
+                                    <div class="package-price">300 ₽</div>
+                                </div>
+                                <div class="package-content">
+                                    <ul class="package-benefits">
+                                        <li><i class="fas fa-check"></i> 700 монет</li>
+                                        <li><i class="fas fa-check"></i> 3 премиум скина</li>
+                                        <li><i class="fas fa-check"></i> VIP статус на 7 дней</li>
+                                    </ul>
+                                    <button class="package-buy-btn">Выбрать</button>
+                                </div>
+                            </div>
+                            
+                            <div class="donation-package">
+                                <div class="package-header">
+                                    <h3>VIP</h3>
+                                    <div class="package-price">500 ₽</div>
+                                </div>
+                                <div class="package-content">
+                                    <ul class="package-benefits">
+                                        <li><i class="fas fa-check"></i> 1500 монет</li>
+                                        <li><i class="fas fa-check"></i> 5 VIP скинов</li>
+                                        <li><i class="fas fa-check"></i> VIP статус на 30 дней</li>
+                                        <li><i class="fas fa-check"></i> Уникальные возможности</li>
+                                    </ul>
+                                    <button class="package-buy-btn">Выбрать</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-methods">
+                            <h3>Способы оплаты</h3>
+                            <div class="payment-icons">
+                                <span class="payment-icon"><i class="fab fa-cc-visa"></i></span>
+                                <span class="payment-icon"><i class="fab fa-cc-mastercard"></i></span>
+                                <span class="payment-icon"><i class="fab fa-paypal"></i></span>
+                                <span class="payment-icon"><i class="fas fa-qrcode"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Настройки аккаунта -->
+                    <div class="profile-tab-content" id="settings-tab">
+                        <h1><i class="fas fa-cog"></i> Настройки аккаунта</h1>
+                        <p class="tab-description">Управляйте настройками своего аккаунта и профиля.</p>
+                        
+                        <form class="settings-form">
+                            <div class="settings-section">
+                                <h3>Основная информация</h3>
+                                <div class="form-group">
+                                    <label for="display-name">Отображаемое имя</label>
+                                    <input type="text" id="display-name" value="Player123">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" value="user@example.com">
+                                </div>
+                            </div>
+                            
+                            <div class="settings-section">
+                                <h3>Изменение пароля</h3>
+                                <div class="form-group">
+                                    <label for="current-password">Текущий пароль</label>
+                                    <input type="password" id="current-password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-password">Новый пароль</label>
+                                    <input type="password" id="new-password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirm-password">Подтвердите пароль</label>
+                                    <input type="password" id="confirm-password">
+                                </div>
+                            </div>
+                            
+                            <div class="settings-section">
+                                <h3>Настройки уведомлений</h3>
+                                <div class="form-group checkbox">
+                                    <input type="checkbox" id="email-notifications" checked>
+                                    <label for="email-notifications">Получать уведомления на email</label>
+                                </div>
+                                <div class="form-group checkbox">
+                                    <input type="checkbox" id="news-notifications" checked>
+                                    <label for="news-notifications">Получать новости сервера</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="save-settings-btn">Сохранить изменения</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Проверка авторизации при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем, авторизован ли пользователь
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            
+            // Если пользователь не авторизован, перенаправляем на страницу входа
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+            }
+            
+            // Код для открытия/закрытия выпадающего меню пользователя
+            const avatarDropdown = document.getElementById('avatar-dropdown-toggle');
+            const userDropdown = document.getElementById('user-dropdown');
+            
+            avatarDropdown.addEventListener('click', function() {
+                userDropdown.classList.toggle('active');
+            });
+            
+            // Закрытие выпадающего меню при клике вне его
+            document.addEventListener('click', function(event) {
+                if (!avatarDropdown.contains(event.target) && !userDropdown.contains(event.target)) {
+                    userDropdown.classList.remove('active');
+                }
+            });
+            
+            // Обработчик для кнопки выхода
+            const logoutButton = document.querySelector('.logout');
+            logoutButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Удаляем информацию о входе
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+                
+                // Перенаправляем на страницу входа
+                window.location.href = 'login.html';
+            });
+            
+            // Переключение между вкладками профиля
+            const navItems = document.querySelectorAll('.profile-nav-item');
+            const tabContents = document.querySelectorAll('.profile-tab-content');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Удаляем активный класс со всех элементов навигации
+                    navItems.forEach(navItem => navItem.classList.remove('active'));
+                    
+                    // Добавляем активный класс к выбранному элементу
+                    this.classList.add('active');
+                    
+                    // Получаем ID вкладки
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Скрываем все вкладки
+                    tabContents.forEach(tab => tab.classList.remove('active'));
+                    
+                    // Показываем нужную вкладку
+                    document.getElementById(tabId + '-tab').classList.add('active');
+                });
+            });
+            
+            // Кнопки скачивания и игры
+            const downloadLauncherBtn = document.querySelector('.download-launcher-btn');
+            
+            downloadLauncherBtn.addEventListener('click', function() {
+                // Имитация скачивания лаунчера
+                alert('Скачивание лаунчера началось!');
+                // В реальном проекте здесь был бы window.location.href = 'path/to/launcher.exe'
+            });
+        });
+    </script>
+</body>
+</html>

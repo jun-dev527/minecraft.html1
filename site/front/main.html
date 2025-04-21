@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HydraCraft - Minecraft Server</title>
+    <link rel="stylesheet" href="../src/css.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <!-- Навигационная панель -->
+    <header class="site-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="nav-logo" aria-label="HydraCraft">
+                    <span class="logo-text">HydraCraft</span>
+                </a>
+                
+                <button class="menu-toggle" aria-expanded="false" aria-controls="primary-menu">
+                    <span class="screen-reader-text">Меню</span>
+                    <div class="hamburger">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </button>
+                
+                <div id="primary-menu" class="nav-wrapper">
+                    <ul class="nav-links">
+                        <li class="nav-item"><a href="main.html" class="nav-link active">ГЛАВНАЯ</a></li>
+                        <li class="nav-item"><a href="rules.html" class="nav-link">ПРАВИЛА</a></li>
+                        <li class="nav-item"><a href="shop.html" class="nav-link">МАГАЗИН</a></li>
+                        <li class="nav-item"><a href="profile.html" class="nav-link">ПРОФИЛЬ</a></li>
+                    </ul>
+                    
+                    <div class="nav-auth">
+                        <a href="#" id="profile-button" class="login-btn">Личный кабинет</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="main-banner">
+        <div class="container">
+            <div class="banner-container">
+                <div class="banner-content">
+                    <h1 class="animate-text">HydraCraft</h1>
+                    <h1 class="animate-text">ELDOR</h1>
+                    <p class="animate-text-delay">
+                        Погрузитесь в мир анархии и технологий! ELDOR - это уникальный модпак, где каждый игрок создает свою историю. 
+                        Развивайте технологии, исследуйте магию и сражайтесь за ресурсы в мире без правил.
+                    </p>
+                    <div class="banner-buttons animate-text-delay">
+                        <a href="profile.html" class="start-btn">Начать игру</a>
+                        <a href="#modpacks" class="more-btn">Подробнее</a>
+                    </div>
+                </div>
+                <div class="banner-image animate-text-delay">
+                    <img src="../src/img/ELDOR/banner.png" alt="ELDOR 1">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Сборки -->
+    <section id="modpacks" class="modpacks">
+        <div class="container">
+            <div class="section-header">
+                <h2>Наши сборки</h2>
+            </div>
+            <div class="modpacks-grid">
+                <!-- ELDOR -->
+                <div class="modpack-card">
+                    <div class="modpack-header">
+                        <h3>ELDOR</h3>
+                        <span class="modpack-version">1.20.1</span>
+                    </div>
+                    <div class="modpack-image">
+                        <img src="../src/img/ELDOR/2.png" alt="ELDOR модпак">
+                    </div>
+                    <div class="modpack-info">
+                        <div class="modpack-description">
+                            <p>Анархический сервер с уникальными модами, крафтами и боссами. Погрузитесь в мир анархии и технологий!</p>
+                        </div>
+                        <div class="modpack-stats">
+                            <span class="online">
+                                <i class="player-icon"></i>
+                                Онлайн: 43
+                            </span>
+                            <span class="modcount">
+                                <i class="mod-icon"></i>
+                                300+ модов
+                            </span>
+                        </div>
+                        <a href="profile.html" class="download-btn">Скачать сборку</a>
+                    </div>
+                </div>
+
+                <!-- Semi-vanilla -->
+                <div class="modpack-card">
+                    <div class="modpack-header">
+                        <h3>SEMI-VANILLA</h3>
+                        <span class="modpack-version">1.20.1</span>
+                    </div>
+                    <div class="modpack-image">
+                        <img src="../src/img/SEMI_VANILLA/Screenshot_20250420_062244.png" alt="Semi-vanilla модпак">
+                    </div>
+                    <div class="modpack-info">
+                        <div class="modpack-description">
+                            <p>Мирный сервер с уникальными модами, дружным сообществом и множеством возможностей для творчества и исследований.</p>
+                        </div>
+                        <div class="modpack-stats">
+                            <span class="online">
+                                <i class="player-icon"></i>
+                                Онлайн: 32
+                            </span>
+                            <span class="modcount">
+                                <i class="mod-icon"></i>
+                                50+ модов
+                            </span>
+                        </div>
+                        <a href="profile.html" class="download-btn">Скачать сборку</a>
+                    </div>
+                </div>
+
+                <!-- GTNH -->
+                <div class="modpack-card">
+                    <div class="modpack-header">
+                        <h3>GTNH</h3>
+                        <span class="modpack-version">1.7.10</span>
+                    </div>
+                    <div class="modpack-image">
+                        <img src="../src/img/GTNH/4.png" alt="GTNH модпак">
+                    </div>
+                    <div class="modpack-info">
+                        <div class="modpack-description">
+                            <p>Сервер для настоящих ценителей технических модов в Minecraft. Здесь собраны лучшие технические моды старого поколения.</p>
+                        </div>
+                        <div class="modpack-stats">
+                            <span class="online">
+                                <i class="player-icon"></i>
+                                Онлайн: 25
+                            </span>
+                            <span class="modcount">
+                                <i class="mod-icon"></i>
+                                120+ модов
+                            </span>
+                        </div>
+                        <a href="profile.html" class="download-btn">Скачать сборку</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Новости -->
+    <section class="news">
+        <div class="container">
+            <div class="section-header">
+                <h2>Новости</h2>
+            </div>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="../src/img/ELDOR/news.png" alt="Новость 1">
+                    </div>
+                    <div class="news-content">
+                        <h3>Открытие нового сервера</h3>
+                        <p>Встречайте новый сервер с уникальными возможностями и модами!</p>
+                        <a href="#" class="read-more">Читать далее</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">HydraCraft</div>
+                    <p class="footer-desc">Игровой сервер с уникальными модпаками и дружным сообществом</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Навигация</h3>
+                        <a href="main.html">Главная</a>
+                        <a href="rules.html">Правила</a>
+                        <a href="shop.html">Магазин</a>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Полезное</h3>
+                        <a href="profile.html">Скачать лаунчер</a>
+                    </div>
+                </div>
+                <div class="footer-social">
+                    <h3>Присоединяйтесь к нам</h3>
+                    <div class="social-icons">
+                        <a href="https://discord.gg/yourserver" target="_blank" class="social-icon discord" aria-label="Discord">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                            </svg>
+                            <span>Discord</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 HydraCraft. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../src/js.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработчик для кнопки личного кабинета
+            const profileButton = document.getElementById('profile-button');
+            profileButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Проверяем, авторизован ли пользователь
+                const isLoggedIn = localStorage.getItem('isLoggedIn');
+                
+                if (isLoggedIn) {
+                    // Если пользователь авторизован, перенаправляем на страницу профиля
+                    window.location.href = 'profile.html';
+                } else {
+                    // Если пользователь не авторизован, перенаправляем на страницу входа
+                    window.location.href = 'login.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

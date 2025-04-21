@@ -1,0 +1,352 @@
+/* Основные стили для страницы логина */
+.login-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    position: relative;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+.login-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+    background-image: url('assets/login-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+.login-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Левая сторона - форма входа */
+.login-form-container {
+    flex: 1;
+    padding: 40px;
+    background-color: #1f2937;
+    color: #e2e8f0;
+}
+
+.login-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.login-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #9ca3af;
+}
+
+.login-header p {
+    font-size: 16px;
+    color: #6b7280;
+}
+
+.login-form {
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    background-color: #111827;
+    color: #e2e8f0;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+.password-input-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.toggle-password:hover {
+    color: #9ca3af;
+}
+
+.forgot-password {
+    text-align: right;
+    margin-top: 8px;
+}
+
+.forgot-password a {
+    color: #6b7280;
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.forgot-password a:hover {
+    color: #4f46e5;
+    text-decoration: underline;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.remember-me input {
+    margin-right: 10px;
+}
+
+.remember-me label {
+    font-size: 14px;
+    color: #9ca3af;
+    cursor: pointer;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, #4f46e5, #7c3aed);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.login-btn:hover {
+    background: linear-gradient(to right, #4338ca, #6d28d9);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+}
+
+.login-alternative {
+    margin: 30px 0;
+    text-align: center;
+    position: relative;
+}
+
+.login-alternative span {
+    display: inline-block;
+    padding: 0 15px;
+    background-color: #1f2937;
+    position: relative;
+    z-index: 1;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.login-alternative::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #374151;
+}
+
+.social-login {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.social-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid #374151;
+    background-color: #111827;
+    color: #9ca3af;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.social-btn.discord:hover {
+    background-color: #5865F2;
+    color: white;
+    border-color: #5865F2;
+}
+
+.social-btn.google:hover {
+    background-color: #DB4437;
+    color: white;
+    border-color: #DB4437;
+}
+
+.social-btn.steam:hover {
+    background-color: #171a21;
+    color: white;
+    border-color: #171a21;
+}
+
+.register-prompt {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+.register-link {
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+/* Правая сторона - преимущества */
+.login-features {
+    flex: 1;
+    padding: 40px;
+    background-color: #111827;
+    display: flex;
+    flex-direction: column;
+}
+
+.features-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.features-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #9ca3af;
+}
+
+.features-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    flex-grow: 1;
+}
+
+.feature-item {
+    background-color: #1f2937;
+    border-radius: 10px;
+    padding: 25px;
+    transition: all 0.3s;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.feature-icon {
+    margin-bottom: 15px;
+    height: 50px;
+    width: 50px;
+    background: linear-gradient(to right, #4f46e5, #7c3aed);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: white;
+}
+
+.feature-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-bottom: 10px;
+}
+
+.feature-description {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .login-container {
+        flex-direction: column;
+    }
+    
+    .login-features {
+        order: -1;
+    }
+    
+    .features-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-form-container,
+    .login-features {
+        padding: 30px 20px;
+    }
+    
+    .features-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .feature-item {
+        padding: 20px;
+    }
+} 

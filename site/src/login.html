@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход | Enthusiasm</title>
+    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="login.css">
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-section">
+        <div class="login-background"></div>
+        
+        <div class="login-container">
+            <div class="login-form-container">
+                <div class="login-header">
+                    <h1>Вход в аккаунт</h1>
+                    <p>Добро пожаловать на Enthusiasm</p>
+                </div>
+                
+                <div class="login-form">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="username">Игровой никнейм или Email</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Пароль</label>
+                            <div class="password-input-container">
+                                <input type="password" id="password" name="password" required>
+                                <button type="button" id="togglePassword" class="toggle-password">
+                                    <i class="fa fa-eye-slash"></i>
+                                </button>
+                            </div>
+                            <div class="forgot-password">
+                                <a href="recovery.html">Забыли пароль?</a>
+                            </div>
+                        </div>
+                        
+                        <div class="remember-me">
+                            <input type="checkbox" id="rememberMe" name="rememberMe">
+                            <label for="rememberMe">Запомнить меня</label>
+                        </div>
+                        
+                        <button type="submit" class="login-btn">Войти</button>
+                    </form>
+                    
+                    <div class="login-alternative">
+                        <span>Или войдите через</span>
+                    </div>
+                    
+                    <div class="social-login">
+                        <button class="social-btn discord">
+                            <i class="fab fa-discord"></i>
+                        </button>
+                        <button class="social-btn google">
+                            <i class="fab fa-google"></i>
+                        </button>
+                        <button class="social-btn steam">
+                            <i class="fab fa-steam"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="register-prompt">
+                        Нет аккаунта? <a href="registr.html" class="register-link">Зарегистрироваться</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="login-features">
+                <div class="features-header">
+                    <h2>Почему стоит играть на Enthusiasm</h2>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="feature-title">Современные сервера</div>
+                        <div class="feature-description">
+                            Наши сервера работают на мощном оборудовании, обеспечивая стабильный и быстрый геймплей
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="feature-title">Уникальные игровые режимы</div>
+                        <div class="feature-description">
+                            Множество уникальных режимов и миниигр, которые вы не найдете на других серверах
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="feature-title">Регулярные турниры</div>
+                        <div class="feature-description">
+                            Участвуйте в еженедельных турнирах и выигрывайте ценные призы
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="feature-title">Дружелюбное сообщество</div>
+                        <div class="feature-description">
+                            Множество игроков со всего мира в нашем дружном комьюнити
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Показать/скрыть пароль
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        });
+        
+        // Отправка формы
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Здесь будет код для отправки данных на сервер
+            console.log('Logging in with username:', username);
+            
+            // Симуляция успешного входа
+            setTimeout(() => {
+                window.location.href = 'profile.html';
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 

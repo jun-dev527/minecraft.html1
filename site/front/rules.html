@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила - HydraCraft</title>
+    <link rel="stylesheet" href="../src/css.css">
+    <style>
+        .rules-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-top: 120px;
+        }
+        
+        .rules-header h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+        }
+        
+        .rules-header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .rules-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .rules-card {
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .rules-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+            border-color: var(--primary-color);
+        }
+        
+        .rules-card-header {
+            background: rgba(139, 92, 246, 0.2);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+        }
+        
+        .rules-card-header h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .rules-list {
+            padding: 2rem;
+        }
+        
+        .rule-item {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .rule-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .rule-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+        }
+        
+        .rule-text {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        
+        .rule-punishment {
+            display: inline-block;
+            background: rgba(255, 70, 85, 0.2);
+            color: #ff4655;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+            border: 1px solid rgba(255, 70, 85, 0.3);
+        }
+        
+        .permanent-ban {
+            background: rgba(255, 70, 85, 0.3);
+            box-shadow: 0 0 10px rgba(255, 70, 85, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .rules-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .rules-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .rules-card-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <!-- Навигационная панель -->
+    <nav class="navbar">
+        <div class="nav-logo">HydraCraft</div>
+        <div class="nav-links">
+            <a href="main.html">ГЛАВНАЯ</a>
+            <a href="rules.html" class="active">ПРАВИЛА</a>
+            <a href="shop.html">МАГАЗИН</a>
+            <a href="#">ФОРУМ</a>
+            <a href="profile.html">ПРОФИЛЬ</a>
+        </div>
+        <div class="nav-auth">
+            <a href="#" id="profile-button" class="login-btn">Личный кабинет</a>
+        </div>
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Заголовок правил -->
+    <div class="rules-header">
+        <h1>Правила серверов</h1>
+        <p>Соблюдение этих правил обязательно для всех игроков. Нарушение правил ведет к указанным санкциям.</p>
+    </div>
+
+    <!-- Контейнер с правилами -->
+    <div class="rules-container">
+        <!-- ELDOR -->
+        <div class="rules-card">
+            <div class="rules-card-header">
+                <h2>ELDOR</h2>
+            </div>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <div class="rule-text">1. Не использовать баги игры</div>
+                    <span class="rule-punishment">Бан на неделю</span>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-text">2. Не играть с сторонним ПО</div>
+                    <span class="rule-punishment">Бан на неделю</span>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-text">3. Не оскорбляйте людей в чате</div>
+                    <span class="rule-punishment">Мут на 24 часа</span>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-text">4. Не занимайтесь чем-либо связанным с крашем сервера</div>
+                    <span class="rule-punishment permanent-ban">Бан навсегда</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SEMI-VANILLA -->
+        <div class="rules-card">
+            <div class="rules-card-header">
+                <h2>Semi-Vanilla</h2>
+            </div>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <div class="rule-text">1. Не использовать баги игры</div>
+                    <span class="rule-punishment">Бан на неделю</span>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-text">2. Не играть с сторонним ПО</div>
+                    <span class="rule-punishment">Бан на неделю</span>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-text">3. Не оскорбляйте людей в чате</div>
+                    <span class="rule-punishment">Мут на 48 часов</span>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-text">4. Не гриферить постройки других игроков</div>
+                    <span class="rule-punishment">Бан на 3 дня</span>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-text">5. Уважайте других игроков и их постройки</div>
+                    <span class="rule-punishment">Предупреждение</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- GTNH -->
+        <div class="rules-card">
+            <div class="rules-card-header">
+                <h2>GTNH</h2>
+            </div>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <div class="rule-text">1. Не использовать баги игры</div>
+                    <span class="rule-punishment">Бан на неделю</span>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-text">2. Не играть с сторонним ПО</div>
+                    <span class="rule-punishment permanent-ban">Бан навсегда</span>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-text">3. Не оскорбляйте людей в чате</div>
+                    <span class="rule-punishment">Мут на 36 часов</span>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-text">4. Соблюдайте ограничения на количество устройств</div>
+                    <span class="rule-punishment">Предупреждение / Удаление устройств</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Дополнительная информация -->
+    <section class="rules-info">
+        <div class="container" style="max-width: 1200px; margin: 3rem auto; padding: 2rem; background: rgba(20, 20, 20, 0.7); border-radius: 12px; text-align: center;">
+            <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">Дополнительная информация</h2>
+            <p style="color: var(--text-light); margin-bottom: 1rem; line-height: 1.6;">Администрация оставляет за собой право изменять правила и наказания без предварительного уведомления.</p>
+            <p style="color: var(--text-light); margin-bottom: 1rem; line-height: 1.6;">Незнание правил не освобождает от ответственности.</p>
+            <p style="color: var(--text-light); margin-bottom: 1rem; line-height: 1.6;">Если вы стали свидетелем нарушения правил, сообщите об этом администрации сервера.</p>
+            <a href="help.html" class="start-btn" style="display: inline-block; margin-top: 1rem;">Связаться с администрацией</a>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">HydraCraft</div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>Полезная информация</h3>
+                    <a href="main.html">Начать играть</a>
+                    <a href="profile.html">Скачать лаунчер</a>
+                    <a href="rules.html">Правила</a>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon discord">Discord</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright © 2024 HydraCraft - Все права защищены</p>
+        </div>
+    </footer>
+
+    <script src="../src/js.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработчик для кнопки личного кабинета
+            const profileButton = document.getElementById('profile-button');
+            profileButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Проверяем, авторизован ли пользователь
+                const isLoggedIn = localStorage.getItem('isLoggedIn');
+                
+                if (isLoggedIn) {
+                    // Если пользователь авторизован, перенаправляем на страницу профиля
+                    window.location.href = 'profile.html';
+                } else {
+                    // Если пользователь не авторизован, перенаправляем на страницу входа
+                    window.location.href = 'login.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

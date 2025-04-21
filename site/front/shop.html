@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин - HydraCraft</title>
+    <link rel="stylesheet" href="../src/css.css">
+    <style>
+        .shop-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-top: 120px;
+        }
+        
+        .shop-header h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+        }
+        
+        .shop-header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .shop-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .shop-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        
+        .shop-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .shop-tab {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        
+        .shop-tab.active {
+            color: var(--primary-color);
+        }
+        
+        .shop-tab::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .shop-tab.active::after {
+            width: 100%;
+        }
+        
+        .shop-content {
+            display: none;
+        }
+        
+        .shop-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .shop-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .shop-item {
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .shop-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+            border-color: var(--primary-color);
+        }
+        
+        .shop-item-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .shop-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            cursor: zoom-in;
+        }
+        
+        .shop-item:hover .shop-item-image img {
+            transform: scale(1.05);
+        }
+        
+        .shop-item-price {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .shop-item-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .shop-item-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 5px rgba(139, 92, 246, 0.3);
+        }
+        
+        .shop-item-description {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .shop-item-button {
+            background: linear-gradient(45deg, var(--accent-color), #ff6b81);
+            color: white;
+            border: none;
+            padding: 0.8rem 0;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .shop-item-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 70, 85, 0.4);
+        }
+        
+        .payment-methods {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .payment-methods h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .payment-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-icon:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Модальное окно для полного изображения */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+            backdrop-filter: blur(5px);
+        }
+        
+        .image-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: var(--primary-color);
+            transform: rotate(90deg);
+        }
+        
+        @media (max-width: 768px) {
+            .shop-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .shop-tab {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .shop-item-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <!-- Навигационная панель -->
+    <nav class="navbar">
+        <div class="nav-logo">HydraCraft</div>
+        <div class="nav-links">
+            <a href="main.html">ГЛАВНАЯ</a>
+            <a href="rules.html">ПРАВИЛА</a>
+            <a href="shop.html" class="active">МАГАЗИН</a>
+        </div>
+        <div class="nav-auth">
+            <a href="profile.html" class="login-btn">Личный кабинет</a>
+        </div>
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Заголовок магазина -->
+    <div class="shop-header">
+        <h1>Магазин доната</h1>
+        <p>Поддержите наш проект и получите уникальные преимущества на серверах</p>
+    </div>
+
+    <!-- Контейнер магазина -->
+    <div class="shop-container">
+        <!-- Табы серверов -->
+        <div class="shop-tabs">
+            <button class="shop-tab active" data-tab="eldor">ELDOR</button>
+            <button class="shop-tab" data-tab="semi-vanilla">Semi-Vanilla</button>
+            <button class="shop-tab" data-tab="gtnh">GTNH</button>
+        </div>
+
+        <!-- Контент ELDOR -->
+        <div id="eldor" class="shop-content active">
+            <div class="shop-items">
+                <!-- Предмет 1 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/DONATE/1.png" alt="Донат предмет">
+                        <div class="shop-item-price">3000 рублей</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">ТАНК</h3>
+                        <p class="shop-item-description">подойдёт для любого любителя стоять и ничего не делать</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 2 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/DONATE/2.png" alt="Донат предмет">
+                        <div class="shop-item-price">600 рублей</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">дрель</h3>
+                        <p class="shop-item-description">для крупных раскопок, отлично подходит для раскопок крупных подземных баз</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 3 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/DONATE/3.png" alt="Донат предмет">
+                        <div class="shop-item-price">5000 рублей</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">ТУРБО</h3>
+                        <p class="shop-item-description">для тех, кто любит быстрое передвижение и стремительные атаки</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 4 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/DONATE/4.png" alt="Донат предмет">
+                        <div class="shop-item-price">600 рублей</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">ендер-маг</h3>
+                        <p class="shop-item-description">для тех, кто любит использовать магию в бою</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 5 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/DONATE/5.png" alt="Донат предмет">
+                        <div class="shop-item-price">600 рублей</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">фрост-маг</h3>
+                        <p class="shop-item-description">для тех, кто любит использовать магию в бою</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 6 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/DONATE/6.png" alt="Донат предмет">
+                        <div class="shop-item-price">600 рублей</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">магмовый-маг</h3>
+                        <p class="shop-item-description">для тех, кто любит использовать магию в бою</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 7 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/DONATE/7.png" alt="Донат предмет">
+                        <div class="shop-item-price">400 рублей</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">стрелок</h3>
+                        <p class="shop-item-description">для хорошего страта стрелка</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 8 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/DONATE/8.png" alt="Донат предмет">
+                        <div class="shop-item-price">500 рублей</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">мечник</h3>
+                        <p class="shop-item-description">для хорошего страта мечника</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 9 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/DONATE/9.png" alt="Донат предмет">
+                        <div class="shop-item-price">3000 рублей</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">мечник+</h3>
+                        <p class="shop-item-description">улучшенный набор для старта класса мечника</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 10 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/DONATE/10.png" alt="Донат предмет">
+                        <div class="shop-item-price">4000 рублей</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">премиум мечник</h3>
+                        <p class="shop-item-description">улучшенный набор для мечника, позволяет использовать магию и вспомогательные предметы</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 11 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/DONATE/11.png" alt="Донат предмет">
+                        <div class="shop-item-price">7000 рублей</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">мечник</h3>
+                        <p class="shop-item-description">самый лучший набор для мечника, лучше набора не найти, все включено!</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Контент Semi-Vanilla -->
+        <div id="semi-vanilla" class="shop-content">
+            <div class="shop-items">
+                <!-- Предмет 1 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/donate/vanilla1.png" alt="Донат предмет">
+                        <div class="shop-item-price">(цена)</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">(название)</h3>
+                        <p class="shop-item-description">(описание)</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 2 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/donate/vanilla2.png" alt="Донат предмет">
+                        <div class="shop-item-price">(цена)</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">(название)</h3>
+                        <p class="shop-item-description">(описание)</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 3 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/donate/vanilla3.png" alt="Донат предмет">
+                        <div class="shop-item-price">7000 рублей</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">в</h3>
+                        <p class="shop-item-description">(описание)</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Контент GTNH -->
+        <div id="gtnh" class="shop-content">
+            <div class="shop-items">
+                <!-- Предмет 1 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/donate/gtnh1.png" alt="Донат предмет">
+                        <div class="shop-item-price">(цена)</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">(название)</h3>
+                        <p class="shop-item-description">(описание)</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 2 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/donate/gtnh2.png" alt="Донат предмет">
+                        <div class="shop-item-price">(цена)</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">(название)</h3>
+                        <p class="shop-item-description">(описание)</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+                
+                <!-- Предмет 3 -->
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="../src/img/donate/gtnh3.png" alt="Донат предмет">
+                        <div class="shop-item-price">(цена)</div>
+                    </div>
+                    <div class="shop-item-content">
+                        <h3 class="shop-item-title">(название)</h3>
+                        <p class="shop-item-description">(описание)</p>
+                        <a href="#" class="shop-item-button">Купить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Способы оплаты -->
+        <div class="payment-methods">
+            <h3>Способы оплаты</h3>
+            <div class="payment-icons">
+                <img src="../src/img/donate/card.png" alt="Банковская карта" class="payment-icon">
+                <img src="../src/img/donate/qiwi.png" alt="QIWI" class="payment-icon">
+                <img src="../src/img/donate/webmoney.png" alt="WebMoney" class="payment-icon">
+                <img src="../src/img/donate/crypto.png" alt="Криптовалюта" class="payment-icon">
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">HydraCraft</div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>Полезная информация</h3>
+                    <a href="main.html">Начать играть</a>
+                    <a href="rules.html">Правила</a>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon discord">Discord</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright © 2024 HydraCraft - Все права защищены</p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно для полноразмерного изображения -->
+    <div class="image-modal" id="imageModal">
+        <div class="modal-close" onclick="closeModal()">&times;</div>
+        <img src="" class="modal-content" id="fullImage">
+    </div>
+
+    <script src="../src/js.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Табы магазина
+            const shopTabs = document.querySelectorAll('.shop-tab');
+            const shopContents = document.querySelectorAll('.shop-content');
+            
+            shopTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.dataset.tab;
+                    
+                    // Активируем выбранный таб
+                    shopTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Показываем соответствующий контент
+                    shopContents.forEach(content => {
+                        if (content.id === target) {
+                            content.classList.add('active');
+                        } else {
+                            content.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Инициализация модального окна для изображений
+            initImageModal();
+        });
+        
+        // Функции для модального окна с изображениями
+        function initImageModal() {
+            // Находим все изображения товаров
+            const productImages = document.querySelectorAll('.shop-item-image img');
+            const modal = document.getElementById('imageModal');
+            const fullImage = document.getElementById('fullImage');
+            
+            // Добавляем обработчик клика на каждое изображение
+            productImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    // Устанавливаем источник полноразмерного изображения
+                    fullImage.src = this.src;
+                    // Показываем модальное окно
+                    modal.classList.add('active');
+                    // Блокируем прокрутку страницы
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Закрываем модальное окно при клике вне изображения
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Закрываем модальное окно при нажатии ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            // Разблокируем прокрутку страницы
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>

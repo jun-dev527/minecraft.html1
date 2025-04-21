@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | Minecraft Сервер</title>
+    <link rel="stylesheet" href="../src/css.css">
+    <link rel="stylesheet" href="../src/auth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .auth-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .auth-card {
+            background: rgba(27, 32, 44, 0.85);
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+            width: 450px;
+            max-width: 100%;
+        }
+        
+        .auth-header h2 {
+            font-size: 2rem;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .auth-header p {
+            color: #9CA3AF;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #e4e6eb;
+            font-weight: 500;
+        }
+        
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(48, 54, 67, 0.8);
+            border-radius: 5px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid rgba(86, 86, 105, 0.3);
+        }
+        
+        .input-group:focus-within {
+            border-color: #8B5CF6;
+            box-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
+        }
+        
+        .input-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 100%;
+            color: #9CA3AF;
+            font-size: 1rem;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 0.9rem 0.5rem;
+            border: none;
+            background: transparent;
+            color: #fff;
+            font-size: 1rem;
+        }
+        
+        .input-group input::placeholder {
+            color: #6B7280;
+        }
+        
+        .toggle-password {
+            background: transparent;
+            border: none;
+            color: #9CA3AF;
+            cursor: pointer;
+            padding: 0 15px;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        
+        .toggle-password:hover {
+            color: #8B5CF6;
+        }
+        
+        .form-hint {
+            display: block;
+            color: #9CA3AF;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        
+        .form-options {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #6B7280;
+            border-radius: 4px;
+            margin-right: 8px;
+            background: rgba(48, 54, 67, 0.5);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .remember-me input[type="checkbox"]:checked {
+            background: #8B5CF6;
+            border-color: #8B5CF6;
+        }
+        
+        .remember-me input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        .remember-me label {
+            color: #9CA3AF;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        .remember-me label a {
+            color: #8B5CF6;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .remember-me label a:hover {
+            color: #a78bfa;
+            text-decoration: underline;
+        }
+        
+        .auth-button {
+            width: 100%;
+            background: linear-gradient(90deg, #8B5CF6, #6366F1);
+            border: none;
+            padding: 1rem;
+            border-radius: 5px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+            margin-top: 1.5rem;
+        }
+        
+        .auth-button:hover {
+            background: linear-gradient(90deg, #7c4edc, #5457db);
+            box-shadow: 0 6px 15px rgba(139, 92, 246, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .auth-button:active {
+            transform: translateY(0);
+        }
+        
+        .auth-footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: #9CA3AF;
+            font-size: 0.9rem;
+        }
+        
+        .auth-footer a {
+            color: #8B5CF6;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .auth-footer a:hover {
+            color: #a78bfa;
+            text-decoration: underline;
+        }
+        
+        /* Form validation styles */
+        .input-group.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
+        }
+        
+        .error-message {
+            color: #ef4444;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .input-group.error + .error-message,
+        .input-group.error ~ .error-message {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Loading animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: #8B5CF6;
+            animation: spin 1s infinite linear;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Password strength indicator */
+        .password-strength {
+            height: 5px;
+            margin-top: 8px;
+            border-radius: 3px;
+            background: #e5e7eb;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .password-strength-meter {
+            height: 100%;
+            width: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .strength-weak .password-strength-meter {
+            width: 30%;
+            background: #ef4444;
+        }
+        
+        .strength-medium .password-strength-meter {
+            width: 60%;
+            background: #f59e0b;
+        }
+        
+        .strength-strong .password-strength-meter {
+            width: 100%;
+            background: #10b981;
+        }
+        
+        .password-strength-text {
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            color: #9CA3AF;
+        }
+        
+        .strength-weak .password-strength-text {
+            color: #ef4444;
+        }
+        
+        .strength-medium .password-strength-text {
+            color: #f59e0b;
+        }
+        
+        .strength-strong .password-strength-text {
+            color: #10b981;
+        }
+        
+        /* Form transition animations */
+        .auth-form {
+            animation: formAppear 0.5s ease;
+        }
+        
+        @keyframes formAppear {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+
+    <section class="auth-section">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2>Регистрация аккаунта</h2>
+                <p>Создайте свой аккаунт, чтобы присоединиться к нашему серверу</p>
+            </div>
+            
+            <form id="register-form" class="auth-form">
+                <div class="form-group">
+                    <label for="username">Имя пользователя</label>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-user"></i></span>
+                        <input type="text" id="username" name="username" placeholder="Введите имя пользователя" required>
+                    </div>
+                    <span class="error-message" id="username-error">Имя пользователя должно быть от 3 до 16 символов</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-envelope"></i></span>
+                        <input type="email" id="email" name="email" placeholder="Введите email" required>
+                    </div>
+                    <span class="error-message" id="email-error">Пожалуйста, введите корректный email</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-lock"></i></span>
+                        <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+                        <button type="button" class="toggle-password" aria-label="Показать пароль">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="password-strength-meter"></div>
+                    </div>
+                    <span class="password-strength-text">Надежность пароля</span>
+                    <span class="error-message" id="password-error">Пароль должен содержать минимум 8 символов</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password-confirm">Подтверждение пароля</label>
+                    <div class="input-group">
+                        <span class="input-icon"><i class="fas fa-lock"></i></span>
+                        <input type="password" id="password-confirm" name="password-confirm" placeholder="Подтвердите пароль" required>
+                        <button type="button" class="toggle-password" aria-label="Показать пароль">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="error-message" id="password-confirm-error">Пароли не совпадают</span>
+                </div>
+                
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="agree-terms" name="agree-terms" required>
+                        <label for="agree-terms">Я согласен с <a href="#">правилами сервера</a></label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="auth-button">Зарегистрироваться</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Уже есть аккаунт? <a href="login.html">Войти</a></p>
+            </div>
+        </div>
+    </section>
+
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        // Показать/скрыть пароль
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                const passwordField = this.parentElement.querySelector('input');
+                const icon = this.querySelector('i');
+                
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    passwordField.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        });
+        
+        // Обработка отправки формы
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Сбросить ошибки
+            resetErrors();
+            
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const passwordConfirm = document.getElementById('password-confirm').value;
+            const agreeTerms = document.getElementById('agree-terms').checked;
+            
+            // Валидация
+            let isValid = true;
+            
+            // Проверка имени пользователя
+            if (username.length < 3 || username.length > 16) {
+                showError('username', 'Имя пользователя должно быть от 3 до 16 символов');
+                isValid = false;
+            }
+            
+            // Проверка email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('email', 'Пожалуйста, введите корректный email');
+                isValid = false;
+            }
+            
+            // Проверка надежности пароля
+            if (password.length < 8) {
+                showError('password', 'Пароль должен содержать минимум 8 символов');
+                isValid = false;
+            }
+            
+            // Проверка паролей на совпадение
+            if (password !== passwordConfirm) {
+                showError('password-confirm', 'Пароли не совпадают');
+                isValid = false;
+            }
+            
+            // Проверка согласия с правилами
+            if (!agreeTerms) {
+                alert('Вы должны согласиться с правилами сервера');
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                const form = document.getElementById('register-form');
+                form.classList.add('form-shake');
+                setTimeout(() => {
+                    form.classList.remove('form-shake');
+                }, 500);
+                return;
+            }
+            
+            // Сохраняем информацию о пользователе в localStorage
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('username', username);
+            localStorage.setItem('email', email);
+            
+            // Показать анимацию загрузки
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.classList.add('active');
+            
+            // Здесь код для отправки данных на сервер
+            // Имитация загрузки
+            setTimeout(function() {
+                // Перенаправление на профиль
+                window.location.href = 'profile.html';
+            }, 1500);
+        });
+        
+        // Функция для отображения ошибки
+        function showError(fieldId, message) {
+            const inputGroup = document.getElementById(fieldId).parentElement;
+            const errorMessage = document.getElementById(fieldId + '-error');
+            
+            inputGroup.classList.add('error');
+            errorMessage.textContent = message;
+        }
+        
+        // Функция для сброса ошибок
+        function resetErrors() {
+            const inputGroups = document.querySelectorAll('.input-group');
+            inputGroups.forEach(group => {
+                group.classList.remove('error');
+            });
+        }
+        
+        // Сбросить ошибку при вводе
+        document.querySelectorAll('.input-group input').forEach(input => {
+            input.addEventListener('input', function() {
+                this.parentElement.classList.remove('error');
+            });
+        });
+        
+        // Проверка силы пароля
+        const passwordInput = document.getElementById('password');
+        const strengthMeter = document.querySelector('.password-strength');
+        const strengthText = document.querySelector('.password-strength-text');
+        
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            
+            // Удаляем предыдущие классы
+            strengthMeter.classList.remove('strength-weak', 'strength-medium', 'strength-strong');
+            
+            if (password.length >= 8) strength += 1;
+            if (password.match(/[A-Z]/)) strength += 1;
+            if (password.match(/[0-9]/)) strength += 1;
+            if (password.match(/[^a-zA-Z0-9]/)) strength += 1;
+            
+            if (password.length === 0) {
+                strengthText.textContent = 'Надежность пароля';
+                strengthMeter.classList.remove('strength-weak', 'strength-medium', 'strength-strong');
+            } else if (strength < 2) {
+                strengthText.textContent = 'Слабый пароль';
+                strengthMeter.classList.add('strength-weak');
+            } else if (strength < 4) {
+                strengthText.textContent = 'Средний пароль';
+                strengthMeter.classList.add('strength-medium');
+            } else {
+                strengthText.textContent = 'Надежный пароль';
+                strengthMeter.classList.add('strength-strong');
+            }
+        });
+        
+        // Проверка совпадения паролей
+        const passwordConfirmInput = document.getElementById('password-confirm');
+        passwordConfirmInput.addEventListener('input', function() {
+            const password = passwordInput.value;
+            const passwordConfirm = this.value;
+            
+            if (passwordConfirm && password !== passwordConfirm) {
+                showError('password-confirm', 'Пароли не совпадают');
+            } else {
+                this.parentElement.classList.remove('error');
+            }
+        });
+    </script>
+</body>
+</html>
